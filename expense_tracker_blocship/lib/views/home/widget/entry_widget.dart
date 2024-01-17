@@ -9,42 +9,78 @@ class EntryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      margin: const EdgeInsets.symmetric(vertical: 8),
+    return Container(
+      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(
+          blurRadius: 10,
+          // spreadRadius: ,
+          offset: Offset(0, 10),
+          color: Colors.grey.withOpacity(0.50),
+        )
+      ]),
+      // elevation: 2,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            Text(
-              entry.title,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 222, 221, 221),
+              radius: 40,
+              child: entry.expense == 'Expense'
+                  ? const Icon(
+                      Icons.arrow_back,
+                      size: 39,
+                      color: Colors.red,
+                    )
+                  : const Icon(
+                      Icons.arrow_forward_rounded,
+                      size: 39,
+                      color: Colors.green,
+                    ),
             ),
-            Text(
-              DateFormat("d MMMM yyyy 'at' h:mm a")
-                  .format(entry.date.add(entry.time.timeZoneOffset)),
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+            const SizedBox(
+              width: 5,
             ),
-            Text(
-              entry.description.length > 100
-                  ? '${entry.description.substring(0, 100)}...'
-                  : entry.description,
-              style: const TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Type: ${entry.expense}',
-                  style: const TextStyle(fontSize: 16, color: Colors.red),
+                  entry.title,
+                  style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 55, 55, 55)),
                 ),
-                const SizedBox(width: 16),
+                SizedBox(
+                  width: 200,
+                  child: Text(
+                    entry.description.length > 100
+                        ? '${entry.description.substring(0, 100)}...'
+                        : entry.description,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(255, 107, 105, 105)),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
                 Text(
-                  'Amount: \$${entry.ammount}',
-                  style: const TextStyle(fontSize: 16, color: Colors.green),
+                  DateFormat("d MMMM yyyy 'at' h:mm a")
+                      .format(entry.date.add(entry.time.timeZoneOffset)),
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
               ],
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              '${entry.ammount}',
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: Color.fromARGB(255, 55, 55, 55)),
             ),
           ],
         ),

@@ -45,6 +45,23 @@ class HomeViewModel extends BaseViewModel {
       'Income',
       '100',
     ),
+
+    Entry(
+      'Entry 3',
+      'Description for Entry 2. This is an income.',
+      DateTime.now(),
+      DateTime.now(),
+      'Saving',
+      '100',
+    ),
+    Entry(
+      'Entry 4',
+      'Description for Entry 2. This is an income.',
+      DateTime.now(),
+      DateTime.now(),
+      'Saving',
+      '100',
+    ),
     // Add more entries as needed
   ];
   List<PieChartSectionData> getSections() {
@@ -86,7 +103,7 @@ class HomeViewModel extends BaseViewModel {
         titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       PieChartSectionData(
-        color: Colors.white,
+        color: Colors.grey,
         value: savingPercentage,
         title: '${savingPercentage.toStringAsFixed(2)}%',
         radius: 50,

@@ -20,7 +20,7 @@ class LegendItem extends StatelessWidget {
           const SizedBox(width: 8),
           Text(
             label,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
