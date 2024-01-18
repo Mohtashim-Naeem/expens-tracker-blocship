@@ -43,8 +43,11 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i3.AddEntry: (data) {
+      final args = data.getArgs<AddEntryArguments>(
+        orElse: () => const AddEntryArguments(),
+      );
       return _i4.MaterialPageRoute<dynamic>(
-        builder: (context) => _i3.AddEntry(),
+        builder: (context) => _i3.AddEntry(key: args.key),
         settings: data,
       );
     },
@@ -55,6 +58,28 @@ class StackedRouter extends _i1.RouterBase {
 
   @override
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
+}
+
+class AddEntryArguments {
+  const AddEntryArguments({this.key});
+
+  final _i4.Key? key;
+
+  @override
+  String toString() {
+    return '{"key": "$key"}';
+  }
+
+  @override
+  bool operator ==(covariant AddEntryArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode;
+  }
 }
 
 extension NavigatorStateExtension on _i5.NavigationService {
@@ -72,14 +97,16 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddEntry([
+  Future<dynamic> navigateToAddEntry({
+    _i4.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.addEntry,
+        arguments: AddEntryArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -100,14 +127,16 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddEntry([
+  Future<dynamic> replaceWithAddEntry({
+    _i4.Key? key,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.addEntry,
+        arguments: AddEntryArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

@@ -99,8 +99,9 @@ class homeView extends StatelessWidget {
               // ),
               // ),
               floatingActionButton: ElevatedButton(
-                onPressed: () {
-                  viewModel.addEntryView();
+                onPressed: () async {
+                  await viewModel.navigateTaddEntryView();
+                  viewModel.rebuildUi();
                 },
                 child: const Text('Add'),
               ),
@@ -153,10 +154,11 @@ class homeView extends StatelessWidget {
                       ListView.builder(
                           shrinkWrap: true,
                           reverse: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: viewModel.entries.length,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: viewModel.entryService.entries.length,
                           itemBuilder: (context, index) {
-                            return EntryWidget(entry: viewModel.entries[index]);
+                            return EntryWidget(
+                                entry: viewModel.entryService.entries[index]);
                           }),
                     ],
                   ),

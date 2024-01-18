@@ -1,11 +1,17 @@
+import 'package:expense_tracker_blocship/app/app.router.dart';
+import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/views/add_entry/add_entry_viewmodel.dart';
 import 'package:expense_tracker_blocship/views/add_entry/widgets/custom_texfield.dart';
 import 'package:expense_tracker_blocship/views/add_entry/widgets/numeric_keypad.dart';
+import 'package:expense_tracker_blocship/views/home/home_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AddEntry extends StatelessWidget {
   AddEntry({super.key});
+  // final HomeViewModel vm = HomeViewModel();
+
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder.reactive(
@@ -20,7 +26,22 @@ class AddEntry extends StatelessWidget {
                 backgroundColor: const Color(0xffeae8e9),
                 floatingActionButton: FloatingActionButton(
                   shape: const CircleBorder(),
-                  onPressed: () {},
+                  onPressed: () async {
+                    // print(vm.entries.length);
+                    viemodel.entryService.entries.add(
+                      Entry(
+                        'Salary Deposit',
+                        'Description for Entry 1. This is an expense.',
+                        DateTime.now(),
+                        DateTime.now(),
+                        'Expense',
+                        '50',
+                      ),
+                    );
+                    print(viemodel.entryService.entries.length);
+
+                    NavigationService().navigateToHomeView();
+                  },
                   backgroundColor: Colors.blue,
                   foregroundColor: Colors.white,
                   child: const Icon(Icons.check),

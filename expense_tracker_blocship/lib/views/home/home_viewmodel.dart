@@ -1,6 +1,7 @@
 import 'package:expense_tracker_blocship/app/app.locator.dart';
 import 'package:expense_tracker_blocship/app/app.router.dart';
 import 'package:expense_tracker_blocship/models/entry.dart';
+import 'package:expense_tracker_blocship/services/entries_service.dart';
 import 'package:expense_tracker_blocship/views/add_entry/add_entry.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 class HomeViewModel extends BaseViewModel {
   NavigationService navigationService = locator<NavigationService>();
+  EntryService entryService = locator<EntryService>();
+
   int counter = 0;
   increamentCounter() {
     counter++;
@@ -29,53 +32,53 @@ class HomeViewModel extends BaseViewModel {
   //   rebuildUi();
   // }
 
-  addEntryView() {
+  navigateTaddEntryView() {
     navigationService.navigateToAddEntry();
   }
 
-  List<Entry> entries = [
-    Entry(
-      'Salary Deposit',
-      'Description for Entry 1. This is an expense.',
-      DateTime.now(),
-      DateTime.now(),
-      'Expense',
-      '50',
-    ),
-    Entry(
-      'Loan Payment',
-      'Description for Entry 2. This is an income.',
-      DateTime.now(),
-      DateTime.now(),
-      'Income',
-      '100',
-    ),
+  // List<Entry> entries = [
+  //   Entry(
+  //     'Salary Deposit',
+  //     'Description for Entry 1. This is an expense.',
+  //     DateTime.now(),
+  //     DateTime.now(),
+  //     'Expense',
+  //     '50',
+  //   ),
 
-    Entry(
-      'Salary Deposit',
-      'Description for Entry 2. This is an income.',
-      DateTime.now(),
-      DateTime.now(),
-      'Saving',
-      '100',
-    ),
-    Entry(
-      'Loan Payment',
-      'Description for Entry 2. This is an income.',
-      DateTime.now(),
-      DateTime.now(),
-      'Saving',
-      '100',
-    ),
-    // Add more entries as needed
-  ];
+  //   Entry(
+  //     'Loan Payment',
+  //     'Description for Entry 2. This is an income.',
+  //     DateTime.now(),
+  //     DateTime.now(),
+  //     'Income',
+  //     '100',
+  //   ),
+  //   Entry(
+  //     'Salary Deposit',
+  //     'Description for Entry 2. This is an income.',
+  //     DateTime.now(),
+  //     DateTime.now(),
+  //     'Saving',
+  //     '100',
+  //   ),
+  //   Entry(
+  //     'Loan Payment',
+  //     'Description for Entry 2. This is an income.',
+  //     DateTime.now(),
+  //     DateTime.now(),
+  //     'Saving',
+  //     '100',
+  //   ),
+  //   // Add more entries as needed
+  // ];
   List<PieChartSectionData> getSections() {
     // Calculate total amounts for income, expense, and saving
     double totalIncome = 0;
     double totalExpense = 0;
     double totalSaving = 0;
 
-    for (Entry entry in entries) {
+    for (Entry entry in entryService.entries) {
       if (entry.expense == 'Income') {
         totalIncome += double.parse(entry.ammount);
       } else if (entry.expense == 'Expense') {
