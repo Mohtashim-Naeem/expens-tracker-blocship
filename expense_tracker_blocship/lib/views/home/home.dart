@@ -88,69 +88,78 @@ class homeView extends StatelessWidget {
     return ViewModelBuilder.reactive(
         viewModelBuilder: () => HomeViewModel(),
         builder: ((context, viewModel, child) {
-          return Scaffold(
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        viewModel.addEntry();
-                      },
-                      child: const Text('Add'),
-                    ),
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.10,
-                    ),
-                    SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.3,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: AspectRatio(
-                              aspectRatio: 1.6,
-                              child: PieChart(
-                                PieChartData(
-                                  sections: viewModel.getSections(),
-                                  borderData: FlBorderData(show: false),
-                                  centerSpaceRadius: 80,
-                                  sectionsSpace: 5,
-                                  centerSpaceColor: Colors.white,
+          return SafeArea(
+            child: Scaffold(
+              // appBar: AppBar(
+              // title: ElevatedButton(
+              //   onPressed: () {
+              //     viewModel.addEntryView();
+              //   },
+              //   child: const Text('Add'),
+              // ),
+              // ),
+              floatingActionButton: ElevatedButton(
+                onPressed: () {
+                  viewModel.addEntryView();
+                },
+                child: const Text('Add'),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 0.10,
+                      ),
+                      SizedBox(
+                        height: MediaQuery.sizeOf(context).height * 0.3,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: AspectRatio(
+                                aspectRatio: 1.6,
+                                child: PieChart(
+                                  PieChartData(
+                                    sections: viewModel.getSections(),
+                                    borderData: FlBorderData(show: false),
+                                    centerSpaceRadius: 80,
+                                    sectionsSpace: 5,
+                                    centerSpaceColor: Colors.white,
+                                  ),
+                                  swapAnimationDuration:
+                                      const Duration(milliseconds: 150),
+                                  swapAnimationCurve: Curves.linear,
                                 ),
-                                swapAnimationDuration:
-                                    const Duration(milliseconds: 150),
-                                swapAnimationCurve: Curves.linear,
                               ),
                             ),
-                          ),
-                          const Expanded(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                LegendItem(color: Colors.red, label: 'Expense'),
-                                LegendItem(
-                                    color: Colors.green, label: 'Income'),
-                                LegendItem(color: Colors.grey, label: 'Saving'),
-                              ],
-                            ),
-                          )
-                        ],
+                            const Expanded(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  LegendItem(
+                                      color: Colors.red, label: 'Expense'),
+                                  LegendItem(
+                                      color: Colors.green, label: 'Income'),
+                                  LegendItem(
+                                      color: Colors.grey, label: 'Saving'),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
-                    ListView.builder(
-                        shrinkWrap: true,
-                        reverse: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: viewModel.entries.length,
-                        itemBuilder: (context, index) {
-                          return EntryWidget(entry: viewModel.entries[index]);
-                        }),
-                  ],
+                      ListView.builder(
+                          shrinkWrap: true,
+                          reverse: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: viewModel.entries.length,
+                          itemBuilder: (context, index) {
+                            return EntryWidget(entry: viewModel.entries[index]);
+                          }),
+                    ],
+                  ),
                 ),
               ),
             ),

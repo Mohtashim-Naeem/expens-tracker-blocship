@@ -10,14 +10,17 @@ class EntryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          blurRadius: 10,
-          // spreadRadius: ,
-          offset: Offset(0, 10),
-          color: Colors.grey.withOpacity(0.50),
-        )
-      ]),
+      decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 10,
+              // spreadRadius: ,
+              offset: const Offset(0, 10),
+              color: Colors.grey.withOpacity(0.50),
+            ),
+          ],
+          borderRadius: BorderRadius.circular(25)),
       // elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
       child: Padding(

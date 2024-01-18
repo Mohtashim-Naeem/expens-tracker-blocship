@@ -1,4 +1,5 @@
 import 'package:expense_tracker_blocship/app/app.locator.dart';
+import 'package:expense_tracker_blocship/app/app.router.dart';
 import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/views/add_entry/add_entry.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -14,23 +15,27 @@ class HomeViewModel extends BaseViewModel {
     rebuildUi();
   }
 
-  addEntry() {
-    entries.add(
-      Entry(
-        'Entry 3',
-        'Description for Entry 3. This is an income.',
-        DateTime.now(),
-        DateTime.now(),
-        'Expense',
-        '500',
-      ),
-    );
-    rebuildUi();
+  // addEntry() {
+  //   entries.add(
+  //     Entry(
+  //       'Entry 3',
+  //       'Description for Entry 3. This is an income.',
+  //       DateTime.now(),
+  //       DateTime.now(),
+  //       'Expense',
+  //       '100',
+  //     ),
+  //   );
+  //   rebuildUi();
+  // }
+
+  addEntryView() {
+    navigationService.navigateToAddEntry();
   }
 
   List<Entry> entries = [
     Entry(
-      'Entry 1',
+      'Salary Deposit',
       'Description for Entry 1. This is an expense.',
       DateTime.now(),
       DateTime.now(),
@@ -38,7 +43,7 @@ class HomeViewModel extends BaseViewModel {
       '50',
     ),
     Entry(
-      'Entry 2',
+      'Loan Payment',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       DateTime.now(),
@@ -47,7 +52,7 @@ class HomeViewModel extends BaseViewModel {
     ),
 
     Entry(
-      'Entry 3',
+      'Salary Deposit',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       DateTime.now(),
@@ -55,7 +60,7 @@ class HomeViewModel extends BaseViewModel {
       '100',
     ),
     Entry(
-      'Entry 4',
+      'Loan Payment',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       DateTime.now(),

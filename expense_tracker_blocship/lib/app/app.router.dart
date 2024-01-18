@@ -44,7 +44,7 @@ class StackedRouter extends _i1.RouterBase {
     },
     _i3.AddEntry: (data) {
       return _i4.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i3.AddEntry(),
+        builder: (context) => _i3.AddEntry(),
         settings: data,
       );
     },
