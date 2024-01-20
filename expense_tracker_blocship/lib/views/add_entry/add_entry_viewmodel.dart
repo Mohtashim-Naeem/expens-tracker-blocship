@@ -1,4 +1,5 @@
 import 'package:expense_tracker_blocship/app/app.locator.dart';
+import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/services/entries_service.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -8,7 +9,8 @@ class AddEntryViewModel extends BaseViewModel {
   EntryService entryService = locator<EntryService>();
 
   NavigationService _navigationService = locator<NavigationService>();
-  int value = 0;
+  DateTime? selectedDate;
+  TimeOfDay? selectedTime;
 
   final formKey = GlobalKey<FormState>();
 
@@ -19,4 +21,17 @@ class AddEntryViewModel extends BaseViewModel {
   final FocusNode titleFocus = FocusNode();
   final FocusNode descriptionFocus = FocusNode();
   final FocusNode ammountFocus = FocusNode();
+
+  addEntry() {
+    entryService.entries.add(
+      Entry(
+        titleController.text,
+        descriptionController.text,
+        selectedDate!,
+        selectedTime!,
+        'Saving',
+        ammountController.text,
+      ),
+    );
+  }
 }

@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
     this.nextFocus,
     this.hint,
     required this.maxLines,
+    this.enable,
   });
 
   final TextEditingController controller;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final FocusNode? nextFocus;
   final String? hint;
   final int maxLines;
+  final bool? enable;
 
   // final String? label;
 
@@ -22,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      enabled: enable,
       focusNode: currentFocus,
       maxLines: maxLines,
       textInputAction:

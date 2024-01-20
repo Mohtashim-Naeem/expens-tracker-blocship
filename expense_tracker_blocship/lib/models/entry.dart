@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
+
 class Entry {
   final String title;
   final String description;
   final DateTime date;
-  final DateTime time;
+  final TimeOfDay time;
   final String expense;
   final String ammount;
 

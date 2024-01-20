@@ -1,4 +1,5 @@
 import 'package:expense_tracker_blocship/models/entry.dart';
+import 'package:flutter/material.dart';
 
 class EntryService {
   List<Entry> entries = [
@@ -6,7 +7,7 @@ class EntryService {
       'Salary Deposit',
       'Description for Entry 1. This is an expense.',
       DateTime.now(),
-      DateTime.now(),
+      TimeOfDay.now(),
       'Expense',
       '50',
     ),
@@ -15,7 +16,7 @@ class EntryService {
       'Loan Payment',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
-      DateTime.now(),
+      TimeOfDay.now(),
       'Income',
       '100',
     ),
@@ -23,7 +24,7 @@ class EntryService {
       'Salary Deposit',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
-      DateTime.now(),
+      TimeOfDay.now(),
       'Saving',
       '100',
     ),
@@ -31,7 +32,7 @@ class EntryService {
       'Loan Payment',
       'Description for Entry 2. This is an income.',
       DateTime.now(),
-      DateTime.now(),
+      TimeOfDay.now(),
       'Saving',
       '100',
     ),

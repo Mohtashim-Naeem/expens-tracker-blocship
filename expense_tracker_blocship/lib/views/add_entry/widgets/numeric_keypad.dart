@@ -31,48 +31,50 @@ class _NumericKeypadState extends State<NumericKeypad> {
   // 1
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            keyboardButton('1'),
-            keyboardButton('2'),
-            keyboardButton('3'),
-          ],
-        ),
-        Row(
-          children: [
-            keyboardButton('4'),
-            keyboardButton('5'),
-            keyboardButton('6'),
-          ],
-        ),
-        Row(
-          children: [
-            keyboardButton('7'),
-            keyboardButton('8'),
-            keyboardButton('9'),
-          ],
-        ),
-        Row(
-          children: [
-            keyboardButton(''),
-            keyboardButton('0'),
-            keyboardButton('⌫', onPressed: backspace),
-          ],
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 50),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              keyboardButton('1'),
+              keyboardButton('2'),
+              keyboardButton('3'),
+            ],
+          ),
+          Row(
+            children: [
+              keyboardButton('4'),
+              keyboardButton('5'),
+              keyboardButton('6'),
+            ],
+          ),
+          Row(
+            children: [
+              keyboardButton('7'),
+              keyboardButton('8'),
+              keyboardButton('9'),
+            ],
+          ),
+          Row(
+            children: [
+              keyboardButton('0'),
+              keyboardButton('Delete', onPressed: backspace, color: Colors.red),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
-  Widget keyboardButton(String text, {onPressed}) {
+  Widget keyboardButton(String text, {onPressed, Color? color}) {
     return Expanded(
       child: SizedBox(
         height: 80,
         width: 20,
         child: Card(
           margin: EdgeInsets.all(10),
-          color: Colors.white,
+          color: color ?? Colors.white,
           surfaceTintColor: Colors.white,
           child: TextButton(
             style: ElevatedButton.styleFrom(
@@ -81,7 +83,8 @@ class _NumericKeypadState extends State<NumericKeypad> {
             onPressed: onPressed ?? () => input(text, widget.controller),
             child: Text(
               text,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(
+                  color: color == Colors.red ? Colors.white : Colors.grey),
             ),
           ),
         ),

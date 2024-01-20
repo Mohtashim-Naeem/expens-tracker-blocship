@@ -1,3 +1,4 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:expense_tracker_blocship/app/app.router.dart';
 import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/views/add_entry/add_entry_viewmodel.dart';
@@ -9,8 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class AddEntry extends StatelessWidget {
-  AddEntry({super.key});
-  // final HomeViewModel vm = HomeViewModel();
+  const AddEntry({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +27,17 @@ class AddEntry extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   shape: const CircleBorder(),
                   onPressed: () async {
-                    // print(vm.entries.length);
-                    viemodel.entryService.entries.add(
-                      Entry(
-                        'Salary Deposit',
-                        'Description for Entry 1. This is an expense.',
-                        DateTime.now(),
-                        DateTime.now(),
-                        'Expense',
-                        '50',
-                      ),
-                    );
-                    print(viemodel.entryService.entries.length);
+                    viemodel.addEntry();
+                    // viemodel.entryService.entries.add(
+                    //   Entry(
+                    //     'Salary Deposit',
+                    //     'Description for Entry 1. This is an expense.',
+                    //     DateTime.now(),
+                    //     DateTime.now(),
+                    //     'Expense',
+                    //     '50',
+                    //   ),
+                    // );
 
                     NavigationService().navigateToHomeView();
                   },
@@ -66,6 +65,7 @@ class AddEntry extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
+
                           TextField(
                             controller: viemodel.descriptionController,
                             focusNode: viemodel.descriptionFocus,
@@ -90,18 +90,106 @@ class AddEntry extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
+                          GestureDetector(
+                            onTap: () async {
+                              final pickedDate = await showDatePicker(
+                                builder: (context, child) {
+                                  return Theme(
+                                      data: Theme.of(context).copyWith(
+                                          colorScheme: const ColorScheme.light(
+                                        primary: Colors.indigo,
+                                      )),
+                                      child: child!);
+                                },
+                                context: context,
+                                initialDate:
+                                    viemodel.selectedDate ?? DateTime.now(),
+                                firstDate: DateTime(1960),
+                                lastDate: DateTime.now(),
+                              );
+                              if (pickedDate != null) {
+                                viemodel.selectedDate = pickedDate;
+                                viemodel.rebuildUi();
+                              }
+                            },
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 52,
+                              width: MediaQuery.sizeOf(context).width,
+                              child: Text(
+                                viemodel.selectedDate != null
+                                    ? '${viemodel.selectedDate!.day}/${viemodel.selectedDate!.month}/${viemodel.selectedDate!.year}'
+                                    : 'Choose date',
+                                style:
+                                    const TextStyle(color: Color(0xffa1a1a1)),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              final pickedTime = await showTimePicker(
+                                builder: (context, child) {
+                                  return Theme(
+                                      data: Theme.of(context).copyWith(
+                                          colorScheme: const ColorScheme.light(
+                                        primary: Colors.indigo,
+                                      )),
+                                      child: child!);
+                                },
+                                context: context,
+                                initialTime:
+                                    viemodel.selectedTime ?? TimeOfDay.now(),
+                              );
+                              if (pickedTime != null) {
+                                viemodel.selectedTime = pickedTime;
+                                viemodel.rebuildUi();
+                              }
+                            },
+                            child: Container(
+                              alignment: Alignment.centerLeft,
+                              padding: const EdgeInsets.only(left: 10),
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              height: 52,
+                              width: MediaQuery.sizeOf(context).width,
+                              child: Text(
+                                viemodel.selectedTime != null
+                                    ? '${viemodel.selectedTime!.hour}:${viemodel.selectedTime!.minute} ${viemodel.selectedTime!.period == DayPeriod.am ? 'AM' : 'PM'} '
+                                    : 'Choose Time',
+                                style:
+                                    const TextStyle(color: Color(0xffa1a1a1)),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           CustomTextField(
                             controller: viemodel.ammountController,
                             currentFocus: viemodel.ammountFocus,
                             hint: 'Ammount',
                             maxLines: 1,
+                            enable: false,
                           ),
                           // Container(
                           //   child: Text('${viemodel.value}'),
                           // ),
-
+                          const SizedBox(
+                            height: 10,
+                          ),
                           NumericKeypad(
                             controller: viemodel.ammountController,
+                          ),
+                          const SizedBox(
+                            height: 100,
                           ),
                         ],
                       ),

@@ -68,11 +68,22 @@ class EntryWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
+                // Row(
+                //   children: [
                 Text(
-                  DateFormat("d MMMM yyyy 'at' h:mm a")
-                      .format(entry.date.add(entry.time.timeZoneOffset)),
+                  // DateFormat("d MMMM yyyy 'at' h:mm a")
+                  //     .format(entry.date.add(entry.time)),
+                  "${entry.date.day} ${entry.date.month}, ${entry.date.year}",
                   style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
+                // Text(
+                //   // DateFormat("d MMMM yyyy 'at' h:mm a")
+                //   //     .format(entry.date.add(entry.time)),
+                //   entry.time.toString(),
+                //   style: const TextStyle(fontSize: 14, color: Colors.grey),
+                // ),
+                //   ],
+                // ),
               ],
             ),
             const SizedBox(
