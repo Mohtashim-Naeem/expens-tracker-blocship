@@ -1,6 +1,5 @@
 import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class EntryWidget extends StatelessWidget {
   final Entry entry;
@@ -28,7 +27,7 @@ class EntryWidget extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 222, 221, 221),
+              backgroundColor: const Color.fromARGB(255, 222, 221, 221),
               radius: 35,
               child: entry.expense == 'Expense'
                   ? const Icon(
@@ -77,12 +76,19 @@ class EntryWidget extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            Text(
-              '${entry.ammount}',
-              style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Color.fromARGB(255, 55, 55, 55)),
+            SizedBox(
+              width: 60,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  entry.ammount,
+                  style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Color.fromARGB(255, 55, 55, 55)),
+                ),
+              ),
             ),
           ],
         ),

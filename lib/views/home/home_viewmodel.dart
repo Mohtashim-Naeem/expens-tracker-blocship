@@ -2,7 +2,6 @@ import 'package:expense_tracker_blocship/app/app.locator.dart';
 import 'package:expense_tracker_blocship/app/app.router.dart';
 import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/services/entries_service.dart';
-import 'package:expense_tracker_blocship/views/add_entry/add_entry.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';

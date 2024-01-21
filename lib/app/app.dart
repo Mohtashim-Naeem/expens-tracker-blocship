@@ -5,7 +5,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 @StackedApp(routes: [
-  MaterialRoute(page: homeView, initial: true),
+  MaterialRoute(page: HomeView, initial: true),
   MaterialRoute(page: AddEntry),
 ], dependencies: [
   // LazySingleton(classType: RouterService),

@@ -3,13 +3,11 @@ import 'package:expense_tracker_blocship/models/entry.dart';
 import 'package:expense_tracker_blocship/services/entries_service.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 
 class AddEntryViewModel extends BaseViewModel {
   EntryService entryService = locator<EntryService>();
   var selectGender = 'Select gender';
 
-  NavigationService _navigationService = locator<NavigationService>();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
 
@@ -54,13 +52,13 @@ class AddEntryViewModel extends BaseViewModel {
         builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('Validation Error'),
-            content: Text('Please fill in all required fields.'),
+            content: const Text('Please fill in all required fields.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(); // Close the dialog
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -69,7 +67,6 @@ class AddEntryViewModel extends BaseViewModel {
     } else {
       // All fields are valid, proceed with the next steps
       // Add your logic here
-      print('All fields are valid. Proceeding to the next steps.');
     }
   }
 }

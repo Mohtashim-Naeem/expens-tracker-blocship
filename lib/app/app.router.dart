@@ -27,7 +27,7 @@ class StackedRouter extends _i1.RouterBase {
   final _routes = <_i1.RouteDef>[
     _i1.RouteDef(
       Routes.homeView,
-      page: _i2.homeView,
+      page: _i2.HomeView,
     ),
     _i1.RouteDef(
       Routes.addEntry,
@@ -36,18 +36,15 @@ class StackedRouter extends _i1.RouterBase {
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
-    _i2.homeView: (data) {
+    _i2.HomeView: (data) {
       return _i4.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i2.homeView(),
+        builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.AddEntry: (data) {
-      final args = data.getArgs<AddEntryArguments>(
-        orElse: () => const AddEntryArguments(),
-      );
       return _i4.MaterialPageRoute<dynamic>(
-        builder: (context) => _i3.AddEntry(key: args.key),
+        builder: (context) => const _i3.AddEntry(),
         settings: data,
       );
     },
@@ -58,28 +55,6 @@ class StackedRouter extends _i1.RouterBase {
 
   @override
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
-}
-
-class AddEntryArguments {
-  const AddEntryArguments({this.key});
-
-  final _i4.Key? key;
-
-  @override
-  String toString() {
-    return '{"key": "$key"}';
-  }
-
-  @override
-  bool operator ==(covariant AddEntryArguments other) {
-    if (identical(this, other)) return true;
-    return other.key == key;
-  }
-
-  @override
-  int get hashCode {
-    return key.hashCode;
-  }
 }
 
 extension NavigatorStateExtension on _i5.NavigationService {
@@ -97,16 +72,14 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAddEntry({
-    _i4.Key? key,
+  Future<dynamic> navigateToAddEntry([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return navigateTo<dynamic>(Routes.addEntry,
-        arguments: AddEntryArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -127,16 +100,14 @@ extension NavigatorStateExtension on _i5.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAddEntry({
-    _i4.Key? key,
+  Future<dynamic> replaceWithAddEntry([
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  }) async {
+  ]) async {
     return replaceWith<dynamic>(Routes.addEntry,
-        arguments: AddEntryArguments(key: key),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
