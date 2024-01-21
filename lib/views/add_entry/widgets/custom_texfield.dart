@@ -9,6 +9,8 @@ class CustomTextField extends StatelessWidget {
     this.hint,
     required this.maxLines,
     this.enable,
+    required this.maxLength,
+    this.keyboardType,
   });
 
   final TextEditingController controller;
@@ -16,7 +18,9 @@ class CustomTextField extends StatelessWidget {
   final FocusNode? nextFocus;
   final String? hint;
   final int maxLines;
+  final int maxLength;
   final bool? enable;
+  final TextInputType? keyboardType;
 
   // final String? label;
 
@@ -27,9 +31,13 @@ class CustomTextField extends StatelessWidget {
       enabled: enable,
       focusNode: currentFocus,
       maxLines: maxLines,
+      maxLength: 30,
+      keyboardType: keyboardType,
       textInputAction:
           nextFocus == null ? TextInputAction.done : TextInputAction.next,
       decoration: InputDecoration(
+        counterText: '',
+
         // hintText: '$label',
         filled: true,
         fillColor: Colors.white,

@@ -53,6 +53,7 @@ class AddEntry extends StatelessWidget {
                             nextFocus: viemodel.descriptionFocus,
                             hint: 'Tittle',
                             maxLines: 1,
+                            maxLength: 30,
                           ),
                           const SizedBox(
                             height: 10,
@@ -62,12 +63,14 @@ class AddEntry extends StatelessWidget {
                             focusNode: viemodel.descriptionFocus,
                             textInputAction: TextInputAction.done,
                             maxLines: 6,
+                            maxLength: 100,
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
                               floatingLabelBehavior:
                                   FloatingLabelBehavior.never,
                               hintText: 'Description',
+                              counterText: '',
                               hintStyle:
                                   const TextStyle(color: Color(0xffa1a1a1)),
                               enabledBorder: OutlineInputBorder(
@@ -224,7 +227,9 @@ class AddEntry extends StatelessWidget {
                             currentFocus: viemodel.ammountFocus,
                             hint: 'Ammount',
                             maxLines: 1,
-                            enable: false,
+                            maxLength: 6,
+                            enable: true,
+                            keyboardType: TextInputType.none,
                           ),
                           const SizedBox(
                             height: 10,
