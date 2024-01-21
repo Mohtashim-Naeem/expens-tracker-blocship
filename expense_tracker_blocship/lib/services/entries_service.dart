@@ -8,7 +8,7 @@ class EntryService {
       'Description for Entry 1. This is an expense.',
       DateTime.now(),
       TimeOfDay.now(),
-      'Expense',
+      'Income',
       '50',
     ),
 
@@ -17,7 +17,7 @@ class EntryService {
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       TimeOfDay.now(),
-      'Income',
+      'Expense',
       '100',
     ),
     Entry(
@@ -25,7 +25,7 @@ class EntryService {
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       TimeOfDay.now(),
-      'Saving',
+      'Income',
       '100',
     ),
     Entry(
@@ -33,7 +33,7 @@ class EntryService {
       'Description for Entry 2. This is an income.',
       DateTime.now(),
       TimeOfDay.now(),
-      'Saving',
+      'Expense',
       '100',
     ),
     // Add more entries as needed

@@ -7,6 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class AddEntryViewModel extends BaseViewModel {
   EntryService entryService = locator<EntryService>();
+  var selectGender = 'Select gender';
 
   NavigationService _navigationService = locator<NavigationService>();
   DateTime? selectedDate;
@@ -29,9 +30,46 @@ class AddEntryViewModel extends BaseViewModel {
         descriptionController.text,
         selectedDate!,
         selectedTime!,
-        'Saving',
+        selectGender,
         ammountController.text,
       ),
     );
+  }
+
+  void setSelectGender(String value) {
+    selectGender = value;
+    rebuildUi();
+  }
+
+  void validateFields(BuildContext context) {
+    if (selectedDate == null ||
+        selectedTime == null ||
+        selectGender == 'Select gender' ||
+        titleController.text.isEmpty ||
+        descriptionController.text.isEmpty ||
+        ammountController.text.isEmpty) {
+      // Show a pop-up or handle the validation error in some way
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Validation Error'),
+            content: Text('Please fill in all required fields.'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // Close the dialog
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // All fields are valid, proceed with the next steps
+      // Add your logic here
+      print('All fields are valid. Proceeding to the next steps.');
+    }
   }
 }

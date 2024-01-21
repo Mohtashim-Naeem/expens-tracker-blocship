@@ -15,7 +15,7 @@ class LegendItem extends StatelessWidget {
           Container(
             width: 20,
             height: 20,
-            color: color,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
           const SizedBox(width: 8),
           Text(

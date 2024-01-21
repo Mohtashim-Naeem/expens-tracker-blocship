@@ -29,7 +29,7 @@ class EntryWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               backgroundColor: Color.fromARGB(255, 222, 221, 221),
-              radius: 40,
+              radius: 35,
               child: entry.expense == 'Expense'
                   ? const Icon(
                       Icons.arrow_back,
@@ -43,7 +43,7 @@ class EntryWidget extends StatelessWidget {
                     ),
             ),
             const SizedBox(
-              width: 5,
+              width: 10,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,7 +56,7 @@ class EntryWidget extends StatelessWidget {
                       color: Color.fromARGB(255, 55, 55, 55)),
                 ),
                 SizedBox(
-                  width: 200,
+                  width: 150,
                   child: Text(
                     entry.description.length > 100
                         ? '${entry.description.substring(0, 100)}...'
@@ -68,22 +68,10 @@ class EntryWidget extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                // Row(
-                //   children: [
                 Text(
-                  // DateFormat("d MMMM yyyy 'at' h:mm a")
-                  //     .format(entry.date.add(entry.time)),
-                  "${entry.date.day} ${entry.date.month}, ${entry.date.year}",
+                  "${entry.date.day} ${_getMonthName(entry.date.month)}, ${entry.date.year} ${entry.time.hour}:${entry.time.minute} ${entry.time.period == DayPeriod.am ? 'AM' : 'PM'}",
                   style: const TextStyle(fontSize: 14, color: Colors.grey),
                 ),
-                // Text(
-                //   // DateFormat("d MMMM yyyy 'at' h:mm a")
-                //   //     .format(entry.date.add(entry.time)),
-                //   entry.time.toString(),
-                //   style: const TextStyle(fontSize: 14, color: Colors.grey),
-                // ),
-                //   ],
-                // ),
               ],
             ),
             const SizedBox(
@@ -100,5 +88,37 @@ class EntryWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// Function to get the month name from its numerical representation
+String _getMonthName(int month) {
+  switch (month) {
+    case 1:
+      return 'January';
+    case 2:
+      return 'February';
+    case 3:
+      return 'March';
+    case 4:
+      return 'April';
+    case 5:
+      return 'May';
+    case 6:
+      return 'June';
+    case 7:
+      return 'July';
+    case 8:
+      return 'August';
+    case 9:
+      return 'September';
+    case 10:
+      return 'October';
+    case 11:
+      return 'November';
+    case 12:
+      return 'December';
+    default:
+      return '';
   }
 }

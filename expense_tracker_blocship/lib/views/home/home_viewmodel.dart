@@ -18,62 +18,11 @@ class HomeViewModel extends BaseViewModel {
     rebuildUi();
   }
 
-  // addEntry() {
-  //   entries.add(
-  //     Entry(
-  //       'Entry 3',
-  //       'Description for Entry 3. This is an income.',
-  //       DateTime.now(),
-  //       DateTime.now(),
-  //       'Expense',
-  //       '100',
-  //     ),
-  //   );
-  //   rebuildUi();
-  // }
-
   navigateTaddEntryView() {
     navigationService.navigateToAddEntry();
   }
 
-  // List<Entry> entries = [
-  //   Entry(
-  //     'Salary Deposit',
-  //     'Description for Entry 1. This is an expense.',
-  //     DateTime.now(),
-  //     DateTime.now(),
-  //     'Expense',
-  //     '50',
-  //   ),
-
-  //   Entry(
-  //     'Loan Payment',
-  //     'Description for Entry 2. This is an income.',
-  //     DateTime.now(),
-  //     DateTime.now(),
-  //     'Income',
-  //     '100',
-  //   ),
-  //   Entry(
-  //     'Salary Deposit',
-  //     'Description for Entry 2. This is an income.',
-  //     DateTime.now(),
-  //     DateTime.now(),
-  //     'Saving',
-  //     '100',
-  //   ),
-  //   Entry(
-  //     'Loan Payment',
-  //     'Description for Entry 2. This is an income.',
-  //     DateTime.now(),
-  //     DateTime.now(),
-  //     'Saving',
-  //     '100',
-  //   ),
-  //   // Add more entries as needed
-  // ];
   List<PieChartSectionData> getSections() {
-    // Calculate total amounts for income, expense, and saving
     double totalIncome = 0;
     double totalExpense = 0;
     double totalSaving = 0;
@@ -99,22 +48,26 @@ class HomeViewModel extends BaseViewModel {
       PieChartSectionData(
         color: Colors.red,
         value: expensePercentage,
-        title: '${expensePercentage.toStringAsFixed(2)}%',
-        radius: 50,
+        title: '',
+
+        // title: '${expensePercentage.toStringAsFixed(2)}%',
+        radius: 25,
         titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       PieChartSectionData(
         color: Colors.green,
         value: incomePercentage,
-        title: '${incomePercentage.toStringAsFixed(2)}%',
-        radius: 50,
+        title: '',
+        // title: '${incomePercentage.toStringAsFixed(2)}%',
+        radius: 25,
         titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
       PieChartSectionData(
         color: Colors.grey,
         value: savingPercentage,
-        title: '${savingPercentage.toStringAsFixed(2)}%',
-        radius: 50,
+        title: '',
+        // title: '${savingPercentage.toStringAsFixed(2)}%',
+        radius: 25,
         titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
       ),
     ];

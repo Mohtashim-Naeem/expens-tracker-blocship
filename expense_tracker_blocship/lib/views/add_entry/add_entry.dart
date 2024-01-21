@@ -14,6 +14,7 @@ class AddEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.sizeOf(context).width;
     return ViewModelBuilder.reactive(
         viewModelBuilder: () => AddEntryViewModel(),
         builder: (context, viemodel, child) {
@@ -27,17 +28,8 @@ class AddEntry extends StatelessWidget {
                 floatingActionButton: FloatingActionButton(
                   shape: const CircleBorder(),
                   onPressed: () async {
+                    viemodel.validateFields(context);
                     viemodel.addEntry();
-                    // viemodel.entryService.entries.add(
-                    //   Entry(
-                    //     'Salary Deposit',
-                    //     'Description for Entry 1. This is an expense.',
-                    //     DateTime.now(),
-                    //     DateTime.now(),
-                    //     'Expense',
-                    //     '50',
-                    //   ),
-                    // );
 
                     NavigationService().navigateToHomeView();
                   },
@@ -65,7 +57,6 @@ class AddEntry extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-
                           TextField(
                             controller: viemodel.descriptionController,
                             focusNode: viemodel.descriptionFocus,
@@ -119,7 +110,7 @@ class AddEntry extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10)),
                               height: 52,
-                              width: MediaQuery.sizeOf(context).width,
+                              width: width,
                               child: Text(
                                 viemodel.selectedDate != null
                                     ? '${viemodel.selectedDate!.day}/${viemodel.selectedDate!.month}/${viemodel.selectedDate!.year}'
@@ -159,13 +150,69 @@ class AddEntry extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(10)),
                               height: 52,
-                              width: MediaQuery.sizeOf(context).width,
+                              width: width,
                               child: Text(
                                 viemodel.selectedTime != null
                                     ? '${viemodel.selectedTime!.hour}:${viemodel.selectedTime!.minute} ${viemodel.selectedTime!.period == DayPeriod.am ? 'AM' : 'PM'} '
                                     : 'Choose Time',
                                 style:
                                     const TextStyle(color: Color(0xffa1a1a1)),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          PopupMenuButton(
+                            color: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                                side: BorderSide.none,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10))),
+                            constraints: BoxConstraints(
+                              minWidth: width * 0.9,
+                            ),
+                            surfaceTintColor: Colors.white,
+                            position: PopupMenuPosition.under,
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                  value: 'Income', child: Text('Income')),
+                              const PopupMenuItem(
+                                  value: 'Expense', child: Text('Expense')),
+                              const PopupMenuItem(
+                                  value: 'Saving', child: Text('Saving'))
+                            ],
+                            initialValue: viemodel.selectGender,
+                            // onCanceled: () => print('on canceled'),
+                            onSelected: (value) {
+                              viemodel.setSelectGender(value);
+
+                              debugPrint('pop up selected $value');
+                            },
+                            child: Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              alignment: Alignment.centerLeft,
+                              height: 48,
+                              width: width,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    viemodel.selectGender,
+                                    style: const TextStyle(
+                                      color: Color(0xffa1a1a1),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const Icon(Icons.arrow_drop_down,
+                                      color: Color(0xffa1a1a1))
+                                ],
                               ),
                             ),
                           ),
@@ -179,9 +226,6 @@ class AddEntry extends StatelessWidget {
                             maxLines: 1,
                             enable: false,
                           ),
-                          // Container(
-                          //   child: Text('${viemodel.value}'),
-                          // ),
                           const SizedBox(
                             height: 10,
                           ),
